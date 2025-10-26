@@ -49,6 +49,14 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    loadInitialData()
+  }, [])
+
+  const loadInitialData = async () => {
+    return
+  }
+
   const handleCreateRecommendation = () => {
     toast.info('Recommendation creation dialog would open here', {
       description: 'In production, this would open a form to create a new recommendation'

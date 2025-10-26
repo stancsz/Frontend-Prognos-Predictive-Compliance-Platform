@@ -54,45 +54,45 @@ Authorization: Bearer <jwt-token>
 }
 ```
 
-#### `POST /api/auth/logout`
-**Purpose:** Invalidate current JWT token
-
-**Response:**
 ```json
-{
   "success": true
-}
-```
 
-#### `GET /api/auth/me`
-**Purpose:** Get current authenticated user details
+#### `GET /ap
 
-**Response:**
-```json
-{
-  "id": "user-123",
-  "email": "user@example.com",
-  "name": "John Doe",
-  "role": "process_safety_engineer",
-  "organizationId": "org-456"
-}
-```
+`
+  "id": "user-123
+ 
+  "
 
 ---
-
 ## Facilities API
 
-### `GET /api/facilities`
-**Purpose:** Get all facilities for the authenticated user's organization
 
-**Query Parameters:**
-- `riskLevel` (optional): Filter by risk level (critical|high|moderate|low)
-- `search` (optional): Search by name or location
+- `risk
 
-**Response:**
 ```json
-{
   "facilities": [
+      "id": "fac-001"
+      "location": "Houston, TX",
+      "riskLevel": "high",
+ 
+   
+
+  "
+
+### `GET /api/fac
+
+```json
+  "id": "fac-001",
+
+  "riskLevel": "high"
+  "overdueRecommendations": 5,
+  "activeMOCs": 3,
+
+}
+
+*
+**Request Body:**
     {
       "id": "fac-001",
       "name": "Houston Refinery Unit 3",
@@ -114,8 +114,8 @@ Authorization: Bearer <jwt-token>
 **Purpose:** Get detailed information for a specific facility
 
 **Response:**
-```json
-{
+
+*
   "id": "fac-001",
   "name": "Houston Refinery Unit 3",
   "location": "Houston, TX",
@@ -506,8 +506,8 @@ Authorization: Bearer <jwt-token>
 **Response:**
 ```json
 {
-  "trends": [
-    {
+**Purpose:** 
+**Que
       "month": "Jan",
       "incidents": 2,
       "nearmisses": 8
@@ -533,454 +533,454 @@ Authorization: Bearer <jwt-token>
 {
   "trends": [
     {
-      "date": "Q1 2024",
-      "critical": 8,
-      "high": 15,
-      "moderate": 28,
-      "low": 42
-    },
-    {
-      "date": "Q2 2024",
-      "critical": 6,
-      "high": 18,
-      "moderate": 25,
-      "low": 38
-    }
-  ]
-}
-```
+## Aura AI Compliance En
+### `GET /api/compli
 
-### `GET /api/analytics/dashboard-metrics`
-**Purpose:** Get aggregated metrics for dashboard
-
-**Query Parameters:**
-- `facilityId` (optional): Filter by specific facility
-
-**Response:**
 ```json
-{
-  "totalOpenRecommendations": 93,
-  "totalOverdueRecommendations": 19,
-  "totalActiveMOCs": 6,
-  "criticalFacilitiesCount": 1,
-  "averageRiskScore": 58.5,
-  "recommendationsByRisk": {
-    "critical": 12,
-    "high": 31,
-    "moderate": 35,
-    "low": 15
-  },
-  "mocsByStatus": {
-    "draft": 2,
-    "pending-review": 3,
-    "approved": 1
-  }
-}
-```
-
----
-
-## Aura AI Compliance Engine API
-
-### `GET /api/compliance/standards`
-**Purpose:** Get all compliance standards (regulatory + custom)
-
-**Response:**
-```json
-{
-  "standards": [
-    {
-      "id": "osha-psm",
-      "name": "OSHA PSM 1910.119",
-      "type": "regulatory",
-      "description": "OSHA Process Safety Management standard for highly hazardous chemicals",
+  "standards": 
+      
+     
       "clauseCount": 14,
-      "uploadedDate": null,
-      "uploadedBy": null,
-      "organizationId": null
+      "uploadedBy": 
     },
-    {
-      "id": "std-custom-001",
-      "name": "Corporate MOC Policy",
-      "type": "custom",
-      "description": "Internal management of change procedures",
-      "clauseCount": 8,
-      "uploadedDate": "2024-10-15T10:00:00Z",
-      "uploadedBy": "user-123",
-      "organizationId": "org-456"
-    }
+      "id": "std-cust
+      "type": "
+     
+   
+ 
+}
+
+**Purpose:** Get detailed standard informa
+**Response:**
+
+  "name": "OSHA PSM 1
+  "description": "OSHA Process Safety Management stand
+
+      "id": "
+      "
+ 
   ]
-}
 ```
+### `POST /api/complian
 
-### `GET /api/compliance/standards/:id`
-**Purpose:** Get detailed standard information including clauses
-
+- `file`: PDF, DOCX, or TXT
+- `description`: Standard de
 **Response:**
-```json
 {
-  "id": "osha-psm",
-  "name": "OSHA PSM 1910.119",
-  "type": "regulatory",
-  "description": "OSHA Process Safety Management standard for highly hazardous chemicals",
-  "clauseCount": 14,
-  "clauses": [
-    {
-      "id": "clause-001",
-      "clauseNumber": "1910.119(f)(1)(i)(D)",
-      "title": "Operating Procedures - Consequences of Deviation",
-      "content": "The operating procedures shall include the consequences of deviation...",
-      "category": "Operating Procedures"
-    }
-  ]
+  "name": "Custom S
+  "descriptio
+  "s
+  "uploadedBy": "us
 }
-```
 
-### `POST /api/compliance/standards`
-**Purpose:** Upload a custom compliance standard
 
-**Request:** Multipart form-data
-- `file`: PDF, DOCX, or TXT file
-- `name`: Standard name
-- `description`: Standard description
+**P
+-
+###
 
-**Response:**
+- `
+
 ```json
-{
-  "id": "std-custom-002",
-  "name": "Custom Standard Name",
-  "type": "custom",
-  "description": "Description",
-  "clauseCount": 0,
-  "status": "processing",
-  "uploadedDate": "2024-12-20T10:00:00Z",
-  "uploadedBy": "user-123",
-  "organizationId": "org-456"
-}
-```
 
-**Note:** The backend should parse the document using LLM and extract clauses asynchronously. Frontend can poll or use webhooks for status updates.
-
-### `DELETE /api/compliance/standards/:id`
-**Purpose:** Delete a custom standard (only custom standards can be deleted)
-
----
-
-### `POST /api/compliance/analyze`
-**Purpose:** Upload a document and initiate AI compliance analysis
-
-**Request:** Multipart form-data
-- `file`: Document to analyze (PDF, DOCX, TXT)
-- `standardIds`: JSON array of standard IDs to check against
-
-**Response:**
-```json
-{
-  "analysisId": "analysis-12345",
-  "status": "processing",
-  "documentName": "operating-procedure-v2.pdf",
-  "documentType": "application/pdf",
+  "documentName": "operating-proced
   "selectedStandards": ["osha-psm", "epa-rmp"],
-  "uploadedDate": "2024-12-20T10:00:00Z"
-}
-```
 
-**Note:** This initiates an asynchronous analysis. Frontend should poll for results or use webhooks.
 
-### `GET /api/compliance/analyses/:id`
-**Purpose:** Get compliance analysis results
 
+*
 **Response:**
-```json
 {
-  "id": "analysis-12345",
-  "documentName": "operating-procedure-v2.pdf",
-  "documentType": "application/pdf",
-  "uploadedDate": "2024-12-20T10:00:00Z",
-  "analyzedDate": "2024-12-20T10:05:00Z",
-  "selectedStandards": ["osha-psm", "epa-rmp"],
-  "status": "complete",
+  "documentName": "oper
+  "uploadedDate": "2024-12-20T10:0
+  "selectedStandards": ["os
   "findings": [
-    {
-      "id": "finding-001",
-      "violation": "The operating procedure fails to describe the consequences of deviation",
-      "standardSource": "OSHA 1910.119(f)(1)(i)(D)",
-      "standardClause": "1910.119(f)(1)(i)(D)",
-      "evidenceSnippet": "Section 3.2 describes normal operations but does not include deviation consequences",
-      "recommendation": "Update Section 3.2 to include a specific subsection on consequences of deviation",
+      "id": "finding-001
+      "standardSource": "OS
+      "evidenceSnippet": 
       "actionPlan": [
-        "Schedule a review with the lead operator and process engineer",
-        "Brainstorm potential deviations (e.g., high pressure, low flow)",
-        "Document the safety/health consequences for each deviation",
-        "Add the new section to the procedure and route for MOC approval",
-        "Train all affected operators on the updated procedure"
+      
+     
       ],
-      "status": "pending",
       "dismissReason": null,
-      "editedRecommendation": null,
-      "editedActionPlan": null
-    }
+      "editedActionPlan
   ]
-}
 ```
-
 ### `GET /api/compliance/analyses`
-**Purpose:** Get all compliance analyses for the organization
 
-**Query Parameters:**
 - `page` (optional): Page number
-- `limit` (optional): Items per page
-- `status` (optional): Filter by status (processing|complete|error)
-
-**Response:**
-```json
+- `st
+**R
 {
-  "analyses": [
-    {
-      "id": "analysis-12345",
-      "documentName": "operating-procedure-v2.pdf",
-      "uploadedDate": "2024-12-20T10:00:00Z",
-      "analyzedDate": "2024-12-20T10:05:00Z",
-      "status": "complete",
+   
+
+      "analyzedDate": "2024-12-20T10:05
       "findingsCount": 5,
-      "acceptedCount": 2,
-      "dismissedCount": 1,
-      "pendingCount": 2
+
     }
-  ],
-  "total": 15,
-  "page": 1,
-  "limit": 50
-}
+  "tota
+ 
 ```
+### `PATCH /api/compliance/ana
 
-### `PATCH /api/compliance/analyses/:analysisId/findings/:findingId`
-**Purpose:** Update a finding (edit, accept, dismiss)
-
-**Request Body:**
 ```json
-{
-  "status": "accepted",
-  "editedRecommendation": "Updated recommendation text",
-  "editedActionPlan": ["Step 1", "Step 2", "Step 3"],
-  "dismissReason": "False positive - this is already addressed in Section 5"
+  "status": "accepte
+  "editedActio
 }
-```
 
-### `POST /api/compliance/analyses/:analysisId/findings/:findingId/create-recommendation`
-**Purpose:** Convert an accepted finding into a formal recommendation
-
+**Purpose:** Convert an accepted finding into
 **Request Body:**
-```json
 {
-  "facilityId": "fac-001",
   "assigneeId": "user-789",
-  "dueDate": "2025-06-15"
 }
-```
 
-**Response:**
-```json
-{
-  "recommendationId": "rec-new-001",
-  "title": "Update operating procedure - consequences of deviation",
-  "status": "open"
-}
-```
+`
+  "
 
+```
 ### `DELETE /api/compliance/analyses/:id`
-**Purpose:** Delete a compliance analysis
 
----
 
-## File Upload/Storage API
 
-### `POST /api/files/upload`
-**Purpose:** Upload files (evidence, attachments, etc.)
-
+**Purpose:** Upload fil
 **Request:** Multipart form-data
-- `file`: File to upload
-- `type`: File type category (evidence|attachment|document)
-- `relatedId` (optional): Related entity ID (recommendation, MOC, etc.)
 
-**Response:**
+
 ```json
-{
-  "fileId": "file-12345",
-  "url": "https://storage.example.com/files/file-12345.pdf",
-  "filename": "evidence.pdf",
-  "size": 2048576,
-  "uploadedDate": "2024-12-20T10:00:00Z"
-}
+ 
+  "filename": "evidence.p
+  "uploadedDate": "2024-12-20T10:
 ```
-
 ### `DELETE /api/files/:id`
-**Purpose:** Delete an uploaded file
 
----
 
-## Users & Organization API
 
-### `GET /api/users`
-**Purpose:** Get all users in the organization (for assignee dropdowns, etc.)
-
+**Purpose:** Get all users 
 **Response:**
-```json
 {
-  "users": [
-    {
-      "id": "user-123",
-      "name": "John Doe",
-      "email": "john@example.com",
+   
+
       "role": "process_safety_engineer"
-    }
-  ]
-}
-```
 
+```
 ### `GET /api/organization`
-**Purpose:** Get organization details
 
-**Response:**
-```json
-{
-  "id": "org-456",
-  "name": "Acme Chemical Corp",
-  "plan": "enterprise",
-  "facilitiesCount": 12,
-  "usersCount": 45
-}
 ```
+
+  "plan": "enterprise",
+  "usersCount": 45
 
 ---
-
 ## Error Responses
-
 All error responses follow this format:
 
-```json
-{
   "error": {
-    "code": "VALIDATION_ERROR",
-    "message": "Invalid request parameters",
-    "details": [
-      {
-        "field": "dueDate",
-        "message": "Due date must be in the future"
-      }
+    "me
+ 
+        "message": "Due date must
     ]
-  }
 }
-```
 
-**Common Error Codes:**
-- `UNAUTHORIZED` (401): Invalid or missing authentication
-- `FORBIDDEN` (403): User doesn't have permission
+- `UNAUTHORIZED` (401): Invalid or missing auth
 - `NOT_FOUND` (404): Resource not found
-- `VALIDATION_ERROR` (400): Invalid request data
-- `SERVER_ERROR` (500): Internal server error
-
+-
 ---
-
-## WebSocket Events (Optional)
 
 For real-time updates, the backend may implement WebSocket connections:
 
-### Connection
-```
-ws://api.example.com/ws?token=<jwt-token>
-```
+ws://api.example.com/ws?token=<jwt-tok
 
-### Events
 
-#### `recommendation.updated`
 ```json
-{
-  "event": "recommendation.updated",
-  "data": {
-    "id": "rec-001",
-    "status": "in-progress"
+  "even
+ 
   }
-}
 ```
-
 #### `moc.approved`
-```json
 {
-  "event": "moc.approved",
   "data": {
-    "id": "moc-001",
     "approvedBy": "user-111"
-  }
 }
-```
 
-#### `analysis.complete`
-```json
-{
-  "event": "analysis.complete",
-  "data": {
+```js
+  "event": "analysis.compl
     "id": "analysis-12345",
-    "findingsCount": 5
   }
-}
 ```
-
 ---
-
 ## Rate Limiting
-
-- Standard endpoints: 100 requests per minute per user
-- File upload endpoints: 10 requests per minute per user
+- Standard endpoints:
 - AI analysis endpoints: 5 requests per minute per user
-
 Rate limit headers:
-```
 X-RateLimit-Limit: 100
-X-RateLimit-Remaining: 95
 X-RateLimit-Reset: 1640000000
-```
 
----
 
-## Notes for Backend Implementation
 
-1. **Multi-tenancy:** All data must be scoped by `organizationId` to ensure data isolation
-2. **Audit Trail:** All create/update/delete operations should be logged with user ID and timestamp
-3. **File Storage:** Consider using S3 or similar object storage for file uploads
-4. **LLM Integration:** Aura AI features require OpenAI API integration with proper error handling
-5. **Database:** Recommended to use PostgreSQL or similar relational database with proper indexing
-6. **Caching:** Consider Redis for caching frequently accessed data (facilities, standards)
-7. **Background Jobs:** AI analysis and standard parsing should be handled by background workers (e.g., Bull, Celery)
-8. **Security:** Implement proper input validation, SQL injection prevention, and XSS protection
-9. **CORS:** Configure CORS to allow requests from the frontend domain
-10. **API Versioning:** Consider versioning the API (e.g., `/api/v1/`) for future compatibility
+2. **Audit Trail:** All crea
+4. **LLM Integration:** Aura AI fea
+6. **Caching:** Consider Redis
+8. **
+10.
+-
+## 
 
----
-
-## Backend Technology Stack Recommendations
-
-- **Framework:** Node.js (Express/Fastify) or Python (FastAPI/Django)
-- **Database:** PostgreSQL with Prisma/TypeORM/SQLAlchemy
-- **File Storage:** AWS S3 or equivalent
-- **Cache:** Redis
+- **File Storage:** AWS S3 or equi
 - **Message Queue:** Bull/RabbitMQ/Celery for background jobs
-- **LLM Integration:** OpenAI API client
-- **Authentication:** JWT with refresh tokens
-- **Testing:** Jest/Pytest with >80% coverage
-- **Documentation:** OpenAPI/Swagger spec
 
+- **Documentation:** 
 ---
-
-## Next Steps for Backend Development
-
+## Next Steps for Backend Developmen
 1. Set up the project structure and database schema
-2. Implement authentication and authorization
-3. Create CRUD endpoints for core entities (Facilities, Recommendations, PHAs, MOCs)
-4. Implement analytics aggregation endpoints
-5. Build file upload/storage system
-6. Integrate OpenAI API for Aura AI features
-7. Implement background job processing for AI analysis
-8. Add comprehensive error handling and validation
-9. Write API tests with high coverage
-10. Deploy with proper monitoring and logging
+
+5. Build file
+7. Impl
+9
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

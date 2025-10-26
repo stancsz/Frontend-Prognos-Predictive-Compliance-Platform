@@ -1,0 +1,58 @@
+STANDARD OPERATING PROCEDURE
+Ammonia Refrigeration System - Startup and Shutdown
+
+Document ID: SOP-REF-001
+Revision: 2.0
+Effective Date: January 15, 2024
+Department: Refrigeration Operations
+
+1. PURPOSE
+This procedure establishes the safe startup and shutdown sequence for the ammonia refrigeration system at Building 12.
+
+2. SCOPE
+This procedure applies to all operations personnel responsible for the ammonia refrigeration system.
+
+3. RESPONSIBILITIES
+3.1 Shift Supervisor: Authorize startup/shutdown operations
+3.2 Lead Operator: Execute the procedure
+3.3 Assistant Operator: Monitor parameters and maintain logbook
+
+4. STARTUP PROCEDURE
+4.1 Pre-Startup Inspection
+- Verify all maintenance work is complete
+- Check that all isolation valves are in correct position
+- Inspect compressor for oil level
+
+4.2 System Pressurization
+- Open ammonia supply valve slowly
+- Monitor system pressure using gauge PG-101
+- Verify pressure does not exceed 150 psig
+
+4.3 Compressor Start
+- Engage compressor motor starter
+- Monitor motor amperage 
+- Listen for unusual noises or vibrations
+
+5. SHUTDOWN PROCEDURE
+5.1 Planned Shutdown
+- Notify production supervisor 2 hours in advance
+- Gradually reduce system load
+- Secure compressor when pressure reaches 50 psig
+
+6. EMERGENCY PROCEDURES
+In case of ammonia leak:
+- Evacuate area immediately
+- Activate emergency alarm
+- Contact emergency response team
+
+7. EQUIPMENT LIST
+- Compressor: Model XYZ-500
+- Pressure Gauge: PG-101
+- Emergency Shutoff: ESV-101
+
+8. TRAINING REQUIREMENTS
+All operators must complete annual ammonia safety training.
+
+Approved by:
+John Smith, Operations Manager
+Date: January 10, 2024

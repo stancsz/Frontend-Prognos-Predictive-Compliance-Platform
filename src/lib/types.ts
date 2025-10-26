@@ -73,3 +73,44 @@ export interface RiskTrend {
   moderate: number
   low: number
 }
+
+export type ComplianceStandardType = 'regulatory' | 'custom'
+
+export interface ComplianceStandard {
+  id: string
+  name: string
+  type: ComplianceStandardType
+  description: string
+  uploadedDate?: string
+  uploadedBy?: string
+  organizationId?: string
+  clauseCount?: number
+}
+
+export type FindingStatus = 'pending' | 'accepted' | 'dismissed'
+
+export interface ComplianceFinding {
+  id: string
+  violation: string
+  standardSource: string
+  standardClause: string
+  evidenceSnippet: string
+  recommendation: string
+  actionPlan: string[]
+  status: FindingStatus
+  dismissReason?: string
+  editedRecommendation?: string
+  editedActionPlan?: string[]
+}
+
+export interface ComplianceAnalysis {
+  id: string
+  documentName: string
+  documentType: string
+  uploadedDate: string
+  analyzedDate?: string
+  selectedStandards: string[]
+  findings: ComplianceFinding[]
+  status: 'uploading' | 'analyzing' | 'complete' | 'error'
+  errorMessage?: string
+}

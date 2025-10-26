@@ -1,4 +1,4 @@
-import { ShieldWarning, FileText, GitBranch, TrendUp, Gear } from '@phosphor-icons/react'
+import { ShieldWarning, FileText, GitBranch, TrendUp, Gear, Sparkle } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
 interface NavigationProps {
@@ -9,6 +9,7 @@ interface NavigationProps {
 export function Navigation({ activeView, onViewChange }: NavigationProps) {
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: TrendUp },
+    { id: 'aura', label: 'Aura AI Engine', icon: Sparkle },
     { id: 'recommendations', label: 'Recommendations', icon: ShieldWarning },
     { id: 'pha', label: 'PHA Repository', icon: FileText },
     { id: 'moc', label: 'MOC Workflow', icon: GitBranch },

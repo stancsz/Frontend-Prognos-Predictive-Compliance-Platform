@@ -6,6 +6,7 @@ import { RecommendationsView } from '@/components/views/recommendations-view'
 import { PHAView } from '@/components/views/pha-view'
 import { MOCView } from '@/components/views/moc-view'
 import { AnalyticsView } from '@/components/views/analytics-view'
+import { AuraView } from '@/components/views/aura-view'
 import { Toaster } from '@/components/ui/sonner'
 import { toast } from 'sonner'
 import type { Facility, Recommendation, PHA, MOC, IncidentTrend, RiskTrend } from '@/lib/types'
@@ -61,6 +62,7 @@ function App() {
       <main className="flex-1 overflow-auto">
         <div className="container mx-auto p-6 max-w-7xl">
           {activeView === 'dashboard' && <DashboardView facilities={facilities || []} />}
+          {activeView === 'aura' && <AuraView />}
           {activeView === 'recommendations' && (
             <RecommendationsView 
               recommendations={recommendations || []} 

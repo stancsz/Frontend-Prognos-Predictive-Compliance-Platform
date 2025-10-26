@@ -47,6 +47,13 @@ This is an enterprise SaaS platform with multiple user roles, real-time risk sco
 - **Progression**: View analytics dashboard → Review trending risks → Compare facilities → Identify systemic patterns → Generate action plan
 - **Success criteria**: System can flag equipment classes with above-average incident rates; executives receive weekly risk trend email
 
+### Feature 6: Aura AI Compliance Engine
+- **Functionality**: AI-powered document analysis that compares operational evidence (procedures, MOCs, incident reports) against regulatory and custom compliance standards, automatically identifying violations and generating remediation plans
+- **Purpose**: Eliminates the time-consuming manual review process, increases finding consistency, and surfaces compliance gaps that human reviewers might miss
+- **Trigger**: User uploads document and selects standards to check against
+- **Progression**: Upload document → Select standards (OSHA PSM, EPA RMP, custom) → AI analyzes → Review findings with violation details → Expand to see AI recommendations and action plans → Edit if needed → Accept to create task or dismiss → Export report
+- **Success criteria**: Users can complete a full compliance review in <5 minutes vs. hours manually; AI identifies 30%+ more gaps than manual review; >90% of accepted findings result in actionable recommendations
+
 ## Edge Case Handling
 
 - **Empty States**: New facilities with no data display onboarding guides and sample data import templates rather than blank screens
@@ -112,17 +119,20 @@ Animations should be purposeful and restrained - this is a serious professional 
   - **PHA Repository**: Accordion for expandable study sections, Card for study summaries, Separator for visual grouping, ScrollArea for long hazard lists
   - **MOC Workflow**: Multi-step form with Progress indicator, Alert for PHA impact warnings, Checkbox for approval acknowledgments, Textarea for comments
   - **Analytics**: Custom charts (using recharts library), Tooltip for detailed metrics on hover, Alert for trend warnings
+  - **Aura AI Engine**: Upload component for documents, Checkbox list for standard selection, Card-based findings display with expandable details, Alert for disclaimers, Textarea for editing AI recommendations
   - **Navigation**: Sidebar for primary navigation with collapsible sections
   
 - **Customizations**: 
   - Custom risk score gauge component (circular progress with color-coded severity)
   - Custom timeline component for recommendation lifecycle visualization
   - Status badge variants for workflow states (Open/In-Progress/Complete/Overdue)
+  - Custom compliance finding card with color-coded border based on status (pending/accepted/dismissed)
   
 - **States**: 
   - Buttons: Default navy, Hover with subtle lift shadow, Active with pressed state, Disabled with reduced opacity
   - Inputs: Border changes from gray to cyan on focus, Error state shows red border with inline validation message
   - Table rows: Hover background change, Selected row with accent border, Expandable rows with smooth height transition
+  - File upload: Drag-over state with highlighted border, Upload progress indication
   
 - **Icon Selection**: 
   - Warning/ShieldWarning for risk indicators
@@ -133,6 +143,9 @@ Animations should be purposeful and restrained - this is a serious professional 
   - GitBranch for MOC workflows
   - Funnel for filtering
   - Download for exports
+  - Sparkle for AI-powered features (Aura)
+  - Upload for document upload
+  - Plus for adding new items
   
 - **Spacing**: 
   - Container padding: `p-6` (24px) for main content areas
@@ -147,3 +160,4 @@ Animations should be purposeful and restrained - this is a serious professional 
   - Tables switch to card-based list view on mobile with most critical columns only
   - Multi-column forms become single column on mobile
   - Bottom navigation bar for primary actions on mobile to reduce thumb travel
+  - Aura compliance findings stack vertically with full-width cards on mobile

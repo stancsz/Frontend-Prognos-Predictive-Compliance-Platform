@@ -4,6 +4,8 @@
 
 Prognos is a next-generation compliance technology platform designed for high-hazard industries. By centralizing disparate safety data across facilities, equipment, and processes, Prognos provides a unified view of risk that enables safety professionals to prevent incidents before they occur.
 
+![Prognos demo](docs/1026.gif)
+
 ---
 
 ## 🎯 Overview

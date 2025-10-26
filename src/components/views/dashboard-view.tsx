@@ -15,7 +15,9 @@ export function DashboardView({ facilities }: DashboardViewProps) {
   const totalOverdueRecs = facilities.reduce((sum, f) => sum + f.overdueRecommendations, 0)
   const totalActiveMOCs = facilities.reduce((sum, f) => sum + f.activeMOCs, 0)
   const criticalFacilities = facilities.filter(f => f.riskLevel === 'critical').length
-  const avgRiskScore = Math.round(facilities.reduce((sum, f) => sum + f.riskScore, 0) / facilities.length)
+  const avgRiskScore = facilities.length > 0 
+    ? Math.round(facilities.reduce((sum, f) => sum + f.riskScore, 0) / facilities.length)
+    : 0
 
   return (
     <div className="space-y-6">
@@ -72,25 +74,33 @@ export function DashboardView({ facilities }: DashboardViewProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {facilities.map((facility) => (
-                <TableRow key={facility.id} className="cursor-pointer hover:bg-muted/50">
-                  <TableCell className="font-medium">{facility.name}</TableCell>
-                  <TableCell className="text-muted-foreground">{facility.location}</TableCell>
-                  <TableCell>
-                    <RiskBadge level={facility.riskLevel} />
+              {facilities.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
+                    No facilities found. Add facilities to see risk data.
                   </TableCell>
-                  <TableCell className="text-right font-mono font-medium">{facility.riskScore}</TableCell>
-                  <TableCell className="text-right">{facility.openRecommendations}</TableCell>
-                  <TableCell className="text-right">
-                    {facility.overdueRecommendations > 0 ? (
-                      <span className="text-risk-critical font-medium">{facility.overdueRecommendations}</span>
-                    ) : (
-                      <span className="text-muted-foreground">—</span>
-                    )}
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">{formatDate(facility.lastPHADate)}</TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                facilities.map((facility) => (
+                  <TableRow key={facility.id} className="cursor-pointer hover:bg-muted/50">
+                    <TableCell className="font-medium">{facility.name}</TableCell>
+                    <TableCell className="text-muted-foreground">{facility.location}</TableCell>
+                    <TableCell>
+                      <RiskBadge level={facility.riskLevel} />
+                    </TableCell>
+                    <TableCell className="text-right font-mono font-medium">{facility.riskScore}</TableCell>
+                    <TableCell className="text-right">{facility.openRecommendations}</TableCell>
+                    <TableCell className="text-right">
+                      {facility.overdueRecommendations > 0 ? (
+                        <span className="text-risk-critical font-medium">{facility.overdueRecommendations}</span>
+                      ) : (
+                        <span className="text-muted-foreground">—</span>
+                      )}
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">{formatDate(facility.lastPHADate)}</TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </CardContent>

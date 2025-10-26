@@ -58,29 +58,37 @@ export function MOCView({ mocs }: MOCViewProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {mocs.map((moc) => (
-                <TableRow key={moc.id} className="cursor-pointer hover:bg-muted/50">
-                  <TableCell className="font-medium max-w-sm">
-                    <div className="truncate">{moc.title}</div>
+              {mocs.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
+                    No MOC requests found. Add MOC requests to track facility changes.
                   </TableCell>
-                  <TableCell className="text-muted-foreground">{moc.facilityName}</TableCell>
-                  <TableCell className="text-muted-foreground">{moc.initiator}</TableCell>
-                  <TableCell>
-                    <Badge className={getStatusColor(moc.status)}>{getStatusLabel(moc.status)}</Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    {moc.impactedPHAs > 0 ? (
-                      <span className="font-mono font-medium text-risk-high">{moc.impactedPHAs}</span>
-                    ) : (
-                      <span className="font-mono text-muted-foreground">0</span>
-                    )}
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">
-                    {moc.currentApprover || '—'}
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">{formatDate(moc.submittedDate)}</TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                mocs.map((moc) => (
+                  <TableRow key={moc.id} className="cursor-pointer hover:bg-muted/50">
+                    <TableCell className="font-medium max-w-sm">
+                      <div className="truncate">{moc.title}</div>
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">{moc.facilityName}</TableCell>
+                    <TableCell className="text-muted-foreground">{moc.initiator}</TableCell>
+                    <TableCell>
+                      <Badge className={getStatusColor(moc.status)}>{getStatusLabel(moc.status)}</Badge>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {moc.impactedPHAs > 0 ? (
+                        <span className="font-mono font-medium text-risk-high">{moc.impactedPHAs}</span>
+                      ) : (
+                        <span className="font-mono text-muted-foreground">0</span>
+                      )}
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">
+                      {moc.currentApprover || '—'}
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">{formatDate(moc.submittedDate)}</TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </CardContent>

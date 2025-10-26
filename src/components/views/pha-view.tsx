@@ -46,21 +46,29 @@ export function PHAView({ phas }: PHAViewProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {phas.map((pha) => (
-                <TableRow key={pha.id} className="cursor-pointer hover:bg-muted/50">
-                  <TableCell className="font-medium">{pha.studyName}</TableCell>
-                  <TableCell className="text-muted-foreground">{pha.facilityName}</TableCell>
-                  <TableCell className="font-mono text-sm">{pha.equipmentUnit}</TableCell>
-                  <TableCell>
-                    <Badge className={getStudyTypeColor(pha.studyType)}>{pha.studyType}</Badge>
+              {phas.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={9} className="text-center text-muted-foreground py-8">
+                    No PHA studies found. Add PHA studies to track process hazard analyses.
                   </TableCell>
-                  <TableCell className="text-right font-mono">{pha.scenarioCount}</TableCell>
-                  <TableCell className="text-right font-mono">{pha.recommendationCount}</TableCell>
-                  <TableCell className="text-muted-foreground">{pha.teamLead}</TableCell>
-                  <TableCell className="text-muted-foreground">{formatDate(pha.completedDate)}</TableCell>
-                  <TableCell className="text-muted-foreground">{formatDate(pha.nextReviewDate)}</TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                phas.map((pha) => (
+                  <TableRow key={pha.id} className="cursor-pointer hover:bg-muted/50">
+                    <TableCell className="font-medium">{pha.studyName}</TableCell>
+                    <TableCell className="text-muted-foreground">{pha.facilityName}</TableCell>
+                    <TableCell className="font-mono text-sm">{pha.equipmentUnit}</TableCell>
+                    <TableCell>
+                      <Badge className={getStudyTypeColor(pha.studyType)}>{pha.studyType}</Badge>
+                    </TableCell>
+                    <TableCell className="text-right font-mono">{pha.scenarioCount}</TableCell>
+                    <TableCell className="text-right font-mono">{pha.recommendationCount}</TableCell>
+                    <TableCell className="text-muted-foreground">{pha.teamLead}</TableCell>
+                    <TableCell className="text-muted-foreground">{formatDate(pha.completedDate)}</TableCell>
+                    <TableCell className="text-muted-foreground">{formatDate(pha.nextReviewDate)}</TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </CardContent>
